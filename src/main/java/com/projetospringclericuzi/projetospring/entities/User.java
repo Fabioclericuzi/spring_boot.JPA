@@ -32,7 +32,6 @@ public class User implements Serializable{
 	}
 
 	public User(long id, String name, String phone, String email, String password) {
-		super();
 		this.id = id;
 		this.name = name;
 		this.phone = phone;
@@ -82,7 +81,10 @@ public class User implements Serializable{
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id);
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		return result;
 	}
 
 	@Override
@@ -94,8 +96,12 @@ public class User implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		return id == other.id;
+		if (id != other.id)
+			return false;
+		return true;
 	}
+
+	
 	
 	
 	
