@@ -3,6 +3,8 @@ package com.projetospringclericuzi.projetospring.entities;
 import java.io.Serializable;
 import java.time.Instant;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,26 +18,27 @@ import jakarta.persistence.Table;
 @Table(name = "tb_order")
 public class Order implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
 	private Instant moment;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "client_id")
 	private User client;
-	
+
 	public Order() {
-		
+
 	}
 
-	public Order(long id, Instant moment, User cliente) {
+	public Order(long id, Instant moment, User client) {
 		super();
 		this.id = id;
 		this.moment = moment;
-		this.client = cliente;
+		this.client = client;
 	}
 
 	public long getId() {
@@ -58,8 +61,8 @@ public class Order implements Serializable {
 		return client;
 	}
 
-	public void setCliente(User cliente) {
-		this.client = cliente;
+	public void setCliente(User client) {
+		this.client = client;
 	}
 
 	@Override
@@ -83,6 +86,5 @@ public class Order implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
+
 }
