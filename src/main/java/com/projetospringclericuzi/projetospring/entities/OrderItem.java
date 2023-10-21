@@ -2,6 +2,7 @@ package com.projetospringclericuzi.projetospring.entities;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.projetospringclericuzi.projetospring.entities.pk.OrderItempk;
 
 import jakarta.persistence.EmbeddedId;
@@ -14,7 +15,7 @@ public class OrderItem implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@EmbeddedId
-	private OrderItempk id;
+	private OrderItempk id = new OrderItempk();
 	
 	private Integer quantity;
 	private Double price;
@@ -23,7 +24,7 @@ public class OrderItem implements Serializable{
 		
 	}
 
-	public OrderItem(Product product, Order order,Integer quantity, Double price) {
+	public OrderItem(Double price, Integer quantity, Order order, Product product) {
 		super();
 		id.setOrder(order);
 		id.setProduct(product);
@@ -31,6 +32,7 @@ public class OrderItem implements Serializable{
 		this.price = price;
 	}
 	
+	@JsonIgnore
 	public Order getOrder() {
 		return id.getOrder();	
 	}
