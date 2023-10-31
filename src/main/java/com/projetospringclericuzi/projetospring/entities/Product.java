@@ -6,6 +6,7 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,9 +23,11 @@ public class Product implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Id
+	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", nullable = false)
 	private long id;
+	
 	private String name;
 	private String description;
 	private double price;
@@ -44,9 +47,8 @@ public class Product implements Serializable {
 
 	}
 
-	public Product(long id, String name, String description, double price, String imgUrl) {
+	public Product(String name, String description, double price, String imgUrl) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.price = price;
