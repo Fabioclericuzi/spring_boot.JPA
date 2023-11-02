@@ -6,6 +6,7 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,6 +21,7 @@ public class Category implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", nullable = false)
 	private long id;
 	private String name;
 	
@@ -31,9 +33,8 @@ public class Category implements Serializable {
 		
 	}
 
-	public Category(long id, String name) {
+	public Category(String name) {
 		super();
-		this.id = id;
 		this.name = name;
 	}
 
